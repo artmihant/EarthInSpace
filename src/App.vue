@@ -1,26 +1,25 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div id="app">
+        <Renderer/>
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Renderer from './components/Renderer.vue'
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+    name: 'Hyperspace',
+    components: {
+        Renderer
+    }
 }
 </script>
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+    background-color: black;
+    width:100vw;
+    height:100vh;
 }
 </style>
