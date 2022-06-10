@@ -2,26 +2,27 @@ import * as THREE from "three";
 import {toRaw} from "vue";
 
 const {
-    EventDispatcher,
     Scene,
-    Vector2,
-    Vector3,
+    Group,
     WebGLRenderer,
+    TextureLoader,
     Camera
 } = THREE;
 
 
 export default class Plot {
     /**
+     * @param {Scene} scene
      * @param {Camera} camera
-     * @param {HTMLElement=} canvas
      */
-    constructor(camera) {
-        this.scene = new Scene();
-        this.camera = camera;
+    constructor(scene, camera) {
+        this.scene = scene;
+        this.camera = camera
         this.renderer = new WebGLRenderer();
         this.renderer.setPixelRatio(devicePixelRatio);
+        this.textureLoader = new TextureLoader();
         this.controls = null;
+        this.objects = {scene, camera}
     }
 
     /** @return {HTMLCanvasElement} */
@@ -29,6 +30,9 @@ export default class Plot {
         return this.renderer.domElement;
     }
 
+    texture(url){
+        return this.textureLoader.load(url)
+    }
 
     setSize({width, height}) {
         this.renderer.setSize(width, height);
@@ -41,20 +45,31 @@ export default class Plot {
         }
     }
 
-    addToScene(obj){
-        this.scene.add(toRaw(obj))
+    switch(name, value){
+        if(value !== undefined) this.objects[name].visible = value
+        else this.objects[name].visible = !this.objects[name].visible
+        return this.objects[name].visible
     }
 
-    addToCamera(obj){
-        this.camera.add(toRaw(obj))
+    add(fullname, obj){
+        const path = fullname.split('/')
+        const name = path.slice(-1)[0]
+        let parentname = path.slice(0,-1).join()
+
+        obj.name = name
+
+        this.group(parentname).add(obj)
+        this.objects[fullname] = obj
+
+        return obj
     }
 
-    /**
-     * @param controls
-     * @return {this}
-     */
-    setControls(controls) {
-        this.controls = toRaw(controls);
+    group(name){
+        return name ?
+            this.objects[name] ?
+                this.objects[name] :
+                this.add(name, new Group()) :
+            this.scene
     }
 
     render() {
