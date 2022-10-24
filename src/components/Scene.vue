@@ -41,10 +41,7 @@ export default {
         this.addEarth()
         this.addMoon()
         this.addMars()
-
         this.switch(this.currentPlanet)
-
-        console.log(this.plot)
 
         this.animate();
     },
@@ -75,8 +72,8 @@ export default {
         },
 
         switch(name){
-            this.planets.forEach(planets_name => {
-                this.plot.switch(planets_name, planets_name === name)
+            this.planets.forEach(planet => {
+                this.plot.switch(planet.name, planet.name === name)
             })
         },
 
@@ -91,7 +88,7 @@ export default {
                 new THREE.SphereGeometry(10, 64, 32),
                 new THREE.MeshBasicMaterial( {
                     side:THREE.BackSide,
-                    map: this.plot.texture('/8k_stars_milky_way.jpg'),
+                    map: this.plot.texture('/earthinwindow/img/textures/8k_stars_milky_way.jpg'),
                 })
             ))
         },
@@ -101,14 +98,14 @@ export default {
             this.plot.add('sun/body', new THREE.Mesh(
                 new THREE.SphereGeometry(1.01, 128, 64),
                 new THREE.MeshBasicMaterial( {
-                    map: this.plot.texture('/8k_sun.jpg'),
+                    map: this.plot.texture('/earthinwindow/img/textures/8k_sun.jpg'),
                 })
             ))
 
             this.plot.add('sun/crone', new THREE.Mesh(
                 new THREE.SphereGeometry(1.02, 64, 32),
                 new THREE.MeshBasicMaterial( {
-                    map: this.plot.texture('/8k_sun.jpg'),
+                    map: this.plot.texture('/earthinwindow/img/textures/8k_sun.jpg'),
                     blending:THREE.CustomBlending,
                     blendEquation: THREE.MaxEquation,
                     transparent: true,
@@ -116,7 +113,7 @@ export default {
                 }),
             ))
 
-            this.addPlanet('sun')
+            this.addPlanet({name:'sun', color:'#FDA824'}, )
         },
 
         addMercury(){
@@ -124,14 +121,14 @@ export default {
             this.plot.add('mercury/ground', new THREE.Mesh(
                 new THREE.SphereGeometry(1, 128, 64),
                 new THREE.MeshPhongMaterial( {
-                    map: this.plot.texture('/8k_mercury.jpg'),
-                    bumpMap: this.plot.texture('/8k_mercury.jpg'),
+                    map: this.plot.texture('/earthinwindow/img/textures/8k_mercury.jpg'),
+                    bumpMap: this.plot.texture('/earthinwindow/img/textures/8k_mercury.jpg'),
                     bumpScale: 0.01,
                     shininess: 0.5,
                 })
             ))
 
-            this.addPlanet('mercury')
+            this.addPlanet({name:'mercury', color:'#999899'})
         },
 
         addVenus(){
@@ -139,8 +136,8 @@ export default {
             this.plot.add('venus/ground', new THREE.Mesh(
                 new THREE.SphereGeometry(1, 128, 64),
                 new THREE.MeshPhongMaterial( {
-                    map: this.plot.texture('/8k_venus_surface.jpg'),
-                    bumpMap: this.plot.texture('/8k_venus_surface.jpg'),
+                    map: this.plot.texture('/earthinwindow/img/textures/8k_venus_surface.jpg'),
+                    bumpMap: this.plot.texture('/earthinwindow/img/textures/8k_venus_surface.jpg'),
                     bumpScale:   0.01,
                     shininess: 0.5,
                 })
@@ -149,7 +146,7 @@ export default {
             this.plot.add('venus/cloud', new THREE.Mesh(
                 new THREE.SphereGeometry(1.02, 64, 32),
                 new THREE.MeshPhongMaterial( {
-                    map: this.plot.texture('/8k_venus_atmosphere.jpg'),
+                    map: this.plot.texture('/earthinwindow/img/textures/8k_venus_atmosphere.jpg'),
                     shininess: 0.8,
                     transparent: true,
                     opacity: 0.9
@@ -158,15 +155,15 @@ export default {
             const venus = this.plot.group('venus')
             venus.animate = () => venus.rotation.y += 0.001;
 
-            this.addPlanet('venus')
+            this.addPlanet({name:'venus', color:'#ECBC76'})
         },
 
         addEarth(){
             this.plot.add('earth/day', new THREE.Mesh(
                 new THREE.SphereGeometry(1, 128, 64),
                 new THREE.MeshPhongMaterial( {
-                    map: this.plot.texture('/8k_earth_daymap.jpg'),
-                    bumpMap: this.plot.texture('/8k_earth_daymap.jpg'),
+                    map: this.plot.texture('/earthinwindow/img/textures/8k_earth_daymap.jpg'),
+                    bumpMap: this.plot.texture('/earthinwindow/img/textures/8k_earth_daymap.jpg'),
                     bumpScale:   0.005,
                     shininess: 0.5,
                 })
@@ -175,7 +172,7 @@ export default {
             this.plot.add('earth/night', new THREE.Mesh(
                 new THREE.SphereGeometry(1.005, 128, 64),
                 new THREE.MeshBasicMaterial( {
-                    map: this.plot.texture('/8k_earth_nightmap.jpg'),
+                    map: this.plot.texture('/earthinwindow/img/textures/8k_earth_nightmap.jpg'),
                     blending: THREE.CustomBlending,
                     blendEquation: THREE.MaxEquation,
                 }),
@@ -184,7 +181,7 @@ export default {
             this.plot.add('earth/cloud', new THREE.Mesh(
                 new THREE.SphereGeometry(1.01, 64, 32),
                 new THREE.MeshPhongMaterial( {
-                    map: this.plot.texture('/8k_earth_clouds.jpg'),
+                    map: this.plot.texture('/earthinwindow/img/textures/8k_earth_clouds.jpg'),
                     blending:THREE.AdditiveBlending,
                     shininess: 0.5,
                 }),
@@ -193,7 +190,7 @@ export default {
             this.plot.add('earth/galo', new THREE.Mesh(
                 new THREE.SphereGeometry(1.02, 64, 32),
                 new THREE.MeshPhongMaterial( {
-                    map: this.plot.texture('/8k_earth_daymap.jpg'),
+                    map: this.plot.texture('/earthinwindow/img/textures/8k_earth_daymap.jpg'),
                     side:THREE.BackSide,
                     blending:THREE.AdditiveBlending,
                     shininess: 0.5,
@@ -205,29 +202,29 @@ export default {
             earth.animate = () => earth.rotation.y += 0.001;
             earth.rotation.x += 0.3;
 
-            this.addPlanet('earth')
+            this.addPlanet({name:'earth', color:'#4063FF'})
         },
 
         addMoon(){
             this.plot.add('moon', new THREE.Mesh(
                 new THREE.SphereGeometry(1, 128, 64),
                 new THREE.MeshPhongMaterial( {
-                    map: this.plot.texture('/8k_moon.jpg'),
-                    bumpMap: this.plot.texture('/8k_moon.jpg'),
+                    map: this.plot.texture('/earthinwindow/img/textures/8k_moon.jpg'),
+                    bumpMap: this.plot.texture('/earthinwindow/img/textures/8k_moon.jpg'),
                     bumpScale:   0.01,
                     shininess: 0.5,
                 })
             ))
 
-            this.addPlanet('moon')
+            this.addPlanet({name:'moon', color:'gray'})
         },
 
         addMars(){
             this.plot.add('mars/ground', new THREE.Mesh(
                 new THREE.SphereGeometry(1, 128, 64),
                 new THREE.MeshPhongMaterial( {
-                    map: this.plot.texture('/8k_mars.jpg'),
-                    bumpMap: this.plot.texture('/8k_mars.jpg'),
+                    map: this.plot.texture('/earthinwindow/img/textures/8k_mars.jpg'),
+                    bumpMap: this.plot.texture('/earthinwindow/img/textures/8k_mars.jpg'),
                     bumpScale:   0.01,
                     shininess: 0.5,
                 })
@@ -235,7 +232,7 @@ export default {
             const mars = this.plot.group('mars')
             mars.animate = () => mars.rotation.y += 0.001;
 
-            this.addPlanet('mars')
+            this.addPlanet({name:'mars', color:'red'})
         },
 
     }

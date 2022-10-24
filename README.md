@@ -1,16 +1,18 @@
-# solarsystem
+# Планеты Солнечной системы в 3D
 
-## Project setup
+
+
+## Установка проекта
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Запуск в режиме разработки
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Сборка
 ```
 npm run build
 ```

@@ -10,8 +10,8 @@ export default createStore({
       planets: s => s.planets
   },
   mutations: {
-      addPlanet(state, name){
-          state.planets.push(name)
+      addPlanet(state, {name, color}){
+          state.planets.push({name,color})
       },
       switchToPlanet(state, name){
           state.current_planet = name
