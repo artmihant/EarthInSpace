@@ -21,4 +21,4 @@ npm run build
 
 ### Полюбоваться
 
-Готовую версию можно посмотреть по вдресу https://artmihant.github.io/earthinwindow/
+Готовую версию можно посмотреть по вдресу https://artmihant.github.io/earth_in_space/

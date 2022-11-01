@@ -1,4 +1,4 @@
 module.exports = {
-    publicPath: '/earth_in_window/',
-    outputDir: 'earth_in_window',
+    publicPath: '/earth_in_space/',
+    outputDir: 'earth_in_space',
 }
