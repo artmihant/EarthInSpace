@@ -19,3 +19,6 @@ npm run serve
 npm run build
 ```
 
+### Полюбоваться
+
+Готовую версию можно посмотреть по вдресу https://artmihant.github.io/earthinwindow/
