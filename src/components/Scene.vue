@@ -35,13 +35,13 @@ export default {
 
         this.addSpace()
 
-        this.addSun()
-        this.addMercury()
-        this.addVenus()
+        // this.addSun()
+        // this.addMercury()
+        // this.addVenus()
         this.addEarth()
         this.addMoon()
-        this.addMars()
-        this.switch(this.currentPlanet)
+        // this.addMars()
+        // this.switch(this.currentPlanet)
 
         this.animate();
     },
@@ -73,7 +73,7 @@ export default {
 
         switch(name){
             this.planets.forEach(planet => {
-                this.plot.switch(planet.name, planet.name === name)
+                this.plot.switch(planet.name, true)
             })
         },
 
@@ -85,7 +85,7 @@ export default {
             this.plot.add('sunlight', sunlight)
 
             this.plot.add('stars', new THREE.Mesh(
-                new THREE.SphereGeometry(10, 64, 32),
+                new THREE.SphereGeometry(100, 64, 32),
                 new THREE.MeshBasicMaterial( {
                     side:THREE.BackSide,
                     map: this.plot.texture('/earthinwindow/img/textures/8k_stars_milky_way.jpg'),
@@ -181,7 +181,7 @@ export default {
             this.plot.add('earth/cloud', new THREE.Mesh(
                 new THREE.SphereGeometry(1.01, 64, 32),
                 new THREE.MeshPhongMaterial( {
-                    map: this.plot.texture('/earthinwindow/img/textures/8k_earth_clouds.jpg'),
+                    map: this.plot.texture('/earthinwindow/img/textures/2k_earth_clouds.jpg'),
                     blending:THREE.AdditiveBlending,
                     shininess: 0.5,
                 }),
@@ -190,7 +190,7 @@ export default {
             this.plot.add('earth/galo', new THREE.Mesh(
                 new THREE.SphereGeometry(1.02, 64, 32),
                 new THREE.MeshPhongMaterial( {
-                    map: this.plot.texture('/earthinwindow/img/textures/8k_earth_daymap.jpg'),
+                    map: this.plot.texture('/earthinwindow/img/textures/2k_earth_nightmap.jpg'),
                     side:THREE.BackSide,
                     blending:THREE.AdditiveBlending,
                     shininess: 0.5,
@@ -206,15 +206,21 @@ export default {
         },
 
         addMoon(){
-            this.plot.add('moon', new THREE.Mesh(
-                new THREE.SphereGeometry(1, 128, 64),
+
+            let geom = new THREE.SphereGeometry(0.28, 128, 64)
+
+            let mesh = new THREE.Mesh(
+                geom,
                 new THREE.MeshPhongMaterial( {
-                    map: this.plot.texture('/earthinwindow/img/textures/8k_moon.jpg'),
-                    bumpMap: this.plot.texture('/earthinwindow/img/textures/8k_moon.jpg'),
+                    map: this.plot.texture('/earthinwindow/img/textures/2k_moon.jpg'),
+                    bumpMap: this.plot.texture('/earthinwindow/img/textures/2k_moon.jpg'),
                     bumpScale:   0.01,
                     shininess: 0.5,
                 })
-            ))
+            )
+
+            mesh.position.set(5,2,-20)
+            this.plot.add('moon', mesh)
 
             this.addPlanet({name:'moon', color:'gray'})
         },

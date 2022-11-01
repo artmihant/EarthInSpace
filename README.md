@@ -1,4 +1,6 @@
-# Планеты Солнечной системы в 3D
+# Планета Земля в 3D
+
+Красивая, медитативная планета
 
 
 
@@ -17,5 +19,3 @@ npm run serve
 npm run build
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
